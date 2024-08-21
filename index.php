@@ -71,6 +71,7 @@ if (isset($_POST['delete_all'])) {
     }
 }
 
+$serial_num = 1;
 $con->close();
 ?>
 
@@ -417,6 +418,7 @@ $con->close();
             <table>
                 <thead class=" static">
                     <tr>
+                        <th>Sr.No</th>
                         <th>Invoice Number</th>
                         <th>Customer Name</th>
                         <th>Invoice Date</th>
@@ -429,6 +431,7 @@ $con->close();
                     <?php if (!empty($invoices)): ?>
                         <?php foreach ($invoices as $row): ?>
                             <tr>
+                                <td><?php echo $serial_num ?></td>
                                 <td><?php echo htmlspecialchars($row['invoice_number']); ?></td>
                                 <td><?php echo htmlspecialchars($row['customer_name']); ?></td>
                                 <td><?php echo htmlspecialchars(date('d-m-Y', strtotime($row['invoice_date']))); ?></td>
@@ -447,7 +450,8 @@ $con->close();
                                     <button onclick="showModal('<?php echo htmlspecialchars($row['id']); ?>')" class="mx-1 text-center flex items-center justify-center rounded-md text-white"><img src="./images/delete.png" alt="delete" width="30" height="30" /></button>
                                 </td>
                             </tr>
-                        <?php endforeach; ?>
+                        <?php $serial_num++;
+                        endforeach; ?>
                     <?php else: ?>
                         <tr>
                             <td colspan="6" class="text-center">No invoices found</td>

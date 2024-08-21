@@ -266,9 +266,13 @@ $date = date('Y-m-d');
 
                     <div class="form-group">
                         <h2><strong>Business Details:</strong></h2>
-                        <p class=" flex-col items-start justify-center"><?php echo $user['name']; ?><br>
-                            <?php echo nl2br($user['address']); ?><br>
-                            GST No: <?php echo $user['gst']; ?></p>
+                        <?php if ($user): ?>
+                            <p class=" flex-col items-start justify-center"><?php echo $user['name']; ?><br>
+                                <?php echo nl2br($user['address']); ?><br>
+                                GST No: <?php echo $user['gst']; ?></p>
+                        <?php else: ?>
+                            <p>No details found for the specified user.</p>
+                        <?php endif; ?>
                     </div>
 
                     <div class="separator"></div>
