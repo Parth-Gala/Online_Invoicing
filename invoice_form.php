@@ -428,8 +428,10 @@ $display_date = date('d-F-Y');
                                             ₹<?php echo $product['total_price']; ?>
                                         </td>
                                         <td>
-                                            <input type="number" name="products[<?php echo $product['id']; ?>][quantity]" min="1"
+                                            <div class="form-group">
+                                                <input type="number" name="products[<?php echo $product['id']; ?>][quantity]" min="1"
                                                 placeholder="Enter Quantity">
+                                            </div>
                                         </td>
                                         <td>
                                             <?php echo $product['unit']; ?>

@@ -487,5 +487,8 @@ $con->close();
         </div>
     </div>
 </body>
+<footer style="text-align: center; padding: 10px; position: fixed; bottom: 0; width: 100%; background-color: #f1f1f1;">
+    <p>All rights reserved &copy; 2024 Parth Gala</p>
+</footer>
 
 </html>

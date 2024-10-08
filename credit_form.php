@@ -333,7 +333,7 @@ $date = date('Y-m-d');
                             <th>Product</th>
                             <th>Price</th>
                             <th>Quantity</th>
-                            <th></th>
+                            <th>Unit</th>
                             <th>GST(%)</th>
                         </tr>
                         <?php while ($product = $product_result->fetch_assoc()) { ?>
@@ -342,9 +342,9 @@ $date = date('Y-m-d');
                                     <input type="checkbox" name="products[<?php echo $product['id']; ?>][name]"
                                         value="<?php echo $product['p_name']; ?>">
                                     <?php echo $product['p_name']; ?>
+                                </td>
                                 <td>
                                     ₹<?php echo $product['total_price']; ?>
-                                </td>
                                 </td>
                                 <td>
                                     <input type="number" name="products[<?php echo $product['id']; ?>][quantity]" min="1"
