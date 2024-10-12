@@ -30,6 +30,19 @@ $date = date('Y-m-d');
             background-color: #f4f7fa;
         }
 
+
+        .large-checkbox {
+            width: 20px;
+            height: 20px;
+            background-color: #C51616FF;
+            transform: scale(1.5);
+            -webkit-transform: scale(1.5);
+            -moz-transform: scale(1.5);
+            -ms-transform: scale(1.5);
+            -o-transform: scale(1.5);
+            margin: 5px;
+        }
+
         .dashboard-header {
             background-color: #ff6b6b;
             color: white;
@@ -55,6 +68,7 @@ $date = date('Y-m-d');
             padding: 20px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
+            max-width: 675px;
         }
 
         .form-heading {
@@ -82,7 +96,7 @@ $date = date('Y-m-d');
             margin-top: 5px;
             border: 1px solid #ddd;
             border-radius: 4px;
-            font-size: 1rem;
+            font-size: medium;
             background-color: #f9f9f9;
         }
 
@@ -252,7 +266,7 @@ $date = date('Y-m-d');
     <div class=" w-full h-auto flex justify-around items-start align-top">
         <div class="w-full form-container">
             <h2 class="form-heading">Create Debit Note</h2>
-            <form action="debitnote.php" method="post">
+            <form action="debitnote.php" method="post" target="_blank">
                 <h3>Date: <?php echo $date; ?></h3>
 
                 <div class="form-group">
@@ -289,7 +303,7 @@ $date = date('Y-m-d');
                         <?php } ?>
                     </select>
 
-                    <div class="border-2 rounded-md  border-black py-1">
+                    <div class="border-2 rounded-md  border-black p-2">
                         <p id="customer_name">Name:</p>
                         <p id="customer_phone">Phone: </p>
                         <p id="customer_address">Address: </p>
@@ -318,7 +332,7 @@ $date = date('Y-m-d');
                 </script>
 
         </div>
-        <div class="w-full form-container">
+        <div class="w-[800px] form-container">
             <div class="flex justify-between items-center text-center form-group">
                 <h3 class=" text-start align-top"><strong>Select Products</strong></h3>
                 <div class="text-right mb-4">
@@ -327,25 +341,31 @@ $date = date('Y-m-d');
             </div>
             <table>
                 <tr>
+                    <th>Select</th>
                     <th>Product</th>
-                    <th>Price</th>
                     <th>Quantity</th>
+                    <th>Price (₹)</th>
                     <th>Unit</th>
                     <th>GST(%)</th>
                 </tr>
                 <?php while ($product = $product_result->fetch_assoc()) { ?>
                     <tr>
-                        <td>
-                            <input type="checkbox" name="products[<?php echo $product['id']; ?>][name]"
+                        <td class="form-group">
+                            <input type="checkbox" name="products[<?php echo $product['id']; ?>][name]" class="large-checkbox">
+                        </td>
+                        <td class="form-group">
+                            <input type="text" name="products[<?php echo $product['id']; ?>][name]"
                                 value="<?php echo $product['p_name']; ?>">
-                            <?php echo $product['p_name']; ?>
                         </td>
                         <td>
-                            ₹<?php echo $product['total_price']; ?>
+                            <div class="form-group">
+                                <input type="number" name="products[<?php echo $product['id']; ?>][quantity]" min="1"
+                                    placeholder="Enter Quantity">
+                            </div>
                         </td>
-                        <td>
-                            <input type="number" name="products[<?php echo $product['id']; ?>][quantity]" min="1"
-                                placeholder="Enter Quantity">
+                        <td class="form-group">
+                            <input type="text" name="products[<?php echo $product['id']; ?>][price]"
+                                value="<?php echo $product['total_price']; ?>">
                         </td>
                         <td>
                             <?php echo $product['unit']; ?>

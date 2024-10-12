@@ -29,6 +29,18 @@ $display_date = date('d-F-Y');
             background-color: #f4f7fa;
         }
 
+        .large-checkbox {
+            width: 20px;
+            height: 20px;
+            background-color: #C51616FF;
+            transform: scale(1.5);
+            -webkit-transform: scale(1.5);
+            -moz-transform: scale(1.5);
+            -ms-transform: scale(1.5);
+            -o-transform: scale(1.5);
+            margin: 5px;
+        }
+
         .dashboard-header {
             background-color: #ff6b6b;
             color: white;
@@ -251,7 +263,7 @@ $display_date = date('d-F-Y');
         <div class="grid grid-cols-2 gap-6 mx-1">
             <div class="form-container shadow-lg">
                 <h2 class="form-heading text-center text-2xl">Create Invoice</h2>
-                <form action="invoice.php" method="post">
+                <form action="invoice.php" method="post" target="_blank">
                     <h3>Creation Date: <?php echo $display_date; ?></h3>
 
                     <div class="form-group">
@@ -315,7 +327,7 @@ $display_date = date('d-F-Y');
                         <?php } ?>
                     </select>
 
-                    <div class="border-2 rounded-md border-black py-2 px-4 mt-2">
+                    <div class="border-2 rounded-md border-black p-2 px-4 mt-2">
                         <p id="customer_name">Name:</p>
                         <p id="customer_phone">Phone:</p>
                         <p id="customer_address">Address:</p>
@@ -404,34 +416,39 @@ $display_date = date('d-F-Y');
                     <div class="flex justify-between items-center text-center form-group">
                         <h3 class="text-start"><strong>Select Products</strong></h3>
                         <div class="text-right mb-4">
-                            <a href="add_products.php" class="bg-green-500 text-white p-2 rounded">+ Add Products</a>
+                            <a href="products.php" class="bg-green-500 text-white p-2 rounded">+ Add Products</a>
                         </div>
                     </div>
                     <div class="table-container">
                         <table>
                             <?php if (mysqli_num_rows($product_result) > 0): ?>
                                 <tr>
+                                    <th>Select</th>
                                     <th>Product</th>
-                                    <th>Price</th>
                                     <th>Quantity</th>
+                                    <th>Price (₹)</th>
                                     <th>Unit</th>
                                     <th>GST(%)</th>
                                 </tr>
                                 <?php while ($product = $product_result->fetch_assoc()): ?>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" name="products[<?php echo $product['id']; ?>][name]"
-                                                value="<?php echo $product['p_name']; ?>">
-                                            <?php echo $product['p_name']; ?>
+                                        <td class="form-group">
+                                            <input type="checkbox" name="products[<?php echo $product['id']; ?>][name]" class="large-checkbox">
                                         </td>
-                                        <td>
-                                            ₹<?php echo $product['total_price']; ?>
+                                        <td class="form-group">
+                                            <!-- <input type="checkbox" name="products[<?php echo $product['id']; ?>][name]"> -->
+                                            <input type="text" name="products[<?php echo $product['id']; ?>][name]"
+                                                value="<?php echo $product['p_name']; ?>">
                                         </td>
                                         <td>
                                             <div class="form-group">
                                                 <input type="number" name="products[<?php echo $product['id']; ?>][quantity]" min="1"
-                                                placeholder="Enter Quantity">
+                                                    placeholder="Enter Quantity">
                                             </div>
+                                        </td>
+                                        <td class="form-group">
+                                            <input type="text" name="products[<?php echo $product['id']; ?>][price]"
+                                                value="<?php echo $product['total_price']; ?>">
                                         </td>
                                         <td>
                                             <?php echo $product['unit']; ?>

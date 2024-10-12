@@ -156,17 +156,22 @@ foreach ($products as $product_id => $product) {
         $product_query = "SELECT * FROM product_details WHERE id = $product_id";
         $product_result = $con->query($product_query);
         $product_details = $product_result->fetch_assoc();
+        empty($product['name']) ?  $products_name[] = $product_details['p_name'] : $products_name[] = $product['name'];
+        empty($product['price']) ? $products_price[] = $product_details['total_price'] : $products_price[] = $product['price'];
 
-        $amount = $product_details['total_price'] * $product['quantity'];
+        $product_name = $products_name[count($products_name) - 1];
+        $product_price = $products_price[count($products_price) - 1];
+
+        $amount = $product_price * $product['quantity'];
         $total += $amount;
 
         $html .= "<tr>
                     <td>{$serial_number}</td>
-                    <td>{$product_details['p_name']}</td>
+                    <td>{$product_name}</td>
                     <td>{$product_details['hsn_code']}</td>
                     <td>{$product['quantity']}</td>
                     <td>{$product_details['unit']}</td>
-                    <td>₹{$product_details['total_price']}</td>
+                    <td>₹{$product_price}</td>
                     <td>₹$amount</td>
                 </tr>";
     }

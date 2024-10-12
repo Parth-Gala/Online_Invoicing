@@ -201,15 +201,21 @@ foreach ($products as $product_id => $product) {
         $product_result = $con->query($product_query);
         $product_details = $product_result->fetch_assoc();
 
-        $amount = $product_details['total_price'] * $product['quantity'];
+        empty($product['name']) ?  $products_name[] = $product_details['p_name'] : $products_name[] = $product['name'];
+        empty($product['price']) ? $products_price[] = $product_details['total_price'] : $products_price[] = $product['price'];
+
+        $product_name = $products_name[count($products_name) - 1];
+        $product_price = $products_price[count($products_price) - 1];
+
+        $amount = $product_price * $product['quantity'];
         $gst = $product_details['gstpercent'];
         $total_tax += $amount * $gst / 100;
         $sub_total += $amount;
         $cgst = $total_tax / 2;
 
         $product_ids[] = $product_id;
-        $products_name[] = $product_details['p_name'];
-        $products_price[] = $product_details['total_price'];
+        // $products_name[] = $product['name'] ?? $product_details['p_name'];
+        // $products_price[] = $product_details['total_price'];
         $products_qty[] = $product['quantity'];
         $products_gst[] = $gst;
         $products_hsn[] = $product_details['hsn_code'];
@@ -217,11 +223,11 @@ foreach ($products as $product_id => $product) {
 
         $html .= "<tr>
                     <td align=\"center\" style=\"width:6%;\">{$serial_number}</td>
-                    <td align=\"left\">{$product_details['p_name']}</td>
+                    <td align=\"left\">{$product_name}</td>
                     <td align=\"center\">{$product_details['hsn_code']}</td>
                     <td align=\"center\">{$product['quantity']}</td>
                     <td align=\"center\">{$product_details['unit']}</td>
-                    <td align=\"right\">₹{$product_details['total_price']}</td>
+                    <td align=\"right\">₹{$product_price}</td>
                     <td align=\"right\">₹$amount</td>
                 </tr>";
     }
@@ -318,9 +324,13 @@ foreach ($products as $product_id => $product) {
         $product_result = $con->query($product_query);
         $product_details = $product_result->fetch_assoc();
 
-        $amount = $product_details['total_price'] * $product['quantity'];
+        empty($product['price']) ? $products_price[] = $product_details['total_price'] : $products_price[] = $product['price'];
+        $product_price = $products_price[count($products_price) - 1];
+
+        $amount = $product_price * $product['quantity'];
         $gst = $product_details['gstpercent'];
         $total_tax += $amount * $gst / 100;
+        $each_tax = $amount * $gst / 100;
         $sub_total += $amount;
         $cgst = $total_tax / 2;
         $cgstper = $gst / 2;
@@ -333,17 +343,17 @@ foreach ($products as $product_id => $product) {
                     <td>$cgstamt</td>
                     <td>$cgstper%</td>
                     <td>$cgstamt</td>
-                    <td>₹$total_tax</td>
+                    <td>₹$each_tax</td>
                   </tr>";
     }
 }
 $html .= "<tr>
             <td colspan=\"2\" >Total</td>
             <td colspan=\"1\" ></td>
-            <td colspan=\"1\" >$cgst</td>
+            <td colspan=\"1\" >₹$cgst</td>
             <td colspan=\"1\" ></td>
-            <td colspan=\"1\" >$cgst</td>
-            <td colspan=\"1\" >$total_tax</td>
+            <td colspan=\"1\" >₹$cgst</td>
+            <td colspan=\"1\" >₹$total_tax</td>
         </tr>
         <tr>
             <td colspan=\"3\" ><strong>Bank Detail</strong></td>
