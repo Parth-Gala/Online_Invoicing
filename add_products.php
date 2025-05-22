@@ -281,7 +281,7 @@ if (isset($_POST['submit_product'])) {
                 </div>
 
                 <div class="form-group">
-                    <label for="gstpercent">GST Percentage</label>
+                    <label for="gstpercent">GST Percentage <span style="font-size: small;">(without '%' sign)</span></label>
                     <input type="number" id="gstpercent" name="gstpercent" placeholder="Enter GST %" step="0.01"
                         required />
                 </div>

@@ -1,7 +1,7 @@
 <?php
 include('include/connect.php');
 
-$user_query = "SELECT * FROM user_details WHERE id = 1";
+$user_query = "SELECT * FROM user_details ORDER BY id DESC LIMIT 1";
 $user_result = $con->query($user_query);
 $user = $user_result->fetch_assoc();
 
@@ -486,6 +486,9 @@ $display_date = date('d-F-Y');
         </div>
     </div>
 </body>
+<footer style="text-align: center; padding: 10px; width: 100%; background-color: #f1f1f1;">
+    <p>All rights reserved &copy; 2025 Parth Gala</p>
+</footer>
 
 </html>
 

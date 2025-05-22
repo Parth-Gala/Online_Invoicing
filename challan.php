@@ -13,6 +13,7 @@ if ($con->connect_error) {
 }
 
 $challan_number = $_POST['challan_number'];
+$c_number = $_POST['c_number'];
 $date = $_POST['date'];
 $customer_id = $_POST['customer_id'];
 $products = $_POST['products'];
@@ -21,7 +22,7 @@ $customer_query = "SELECT * FROM customer_details WHERE id = $customer_id";
 $customer_result = $con->query($customer_query);
 $customer = $customer_result->fetch_assoc();
 
-$user_query = "SELECT * FROM user_details WHERE id = 1";
+$user_query = "SELECT * FROM user_details ORDER BY id DESC LIMIT 1";
 $user_result = $con->query($user_query);
 $user = $user_result->fetch_assoc();
 
@@ -118,6 +119,7 @@ $html = <<<EOD
     <table align = "left" border="1" cellpadding="4">
         <tr>
             <td>Challan Number: $challan_number </td>
+            <td>Number: $c_number</td>
             <td>Date: $date</td>
         </tr>
     </table>

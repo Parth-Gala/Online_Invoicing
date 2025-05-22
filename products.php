@@ -329,7 +329,7 @@ if (isset($_GET['delete_id'])) {
                         <p><strong>GST %:</strong> <?php echo htmlspecialchars($product['gstpercent']); ?></p>
                         <p><strong>Total Price:</strong> ₹<?php echo htmlspecialchars($product['total_price']); ?></p>
                         <p><strong>Quantity:</strong> <?php echo htmlspecialchars($product['p_qty']); ?></p>
-                        
+
                         <div class="flex justify-between mt-2">
                             <a href="edit_product.php?id=<?php echo $product['id']; ?>" class="bg-blue-500 text-white p-2 rounded">Edit</a>
                             <a href="#" onclick="confirmDelete('?delete_id=<?php echo $product['id']; ?>');" class="bg-red-500 text-white p-2 rounded">Delete</a>
@@ -354,5 +354,8 @@ if (isset($_GET['delete_id'])) {
         </div>
     </div>
 </body>
+<footer style="text-align: center; padding: 10px; width: 100%; background-color: #f1f1f1;">
+    <p>All rights reserved &copy; 2025 Parth Gala</p>
+</footer>
 
 </html>

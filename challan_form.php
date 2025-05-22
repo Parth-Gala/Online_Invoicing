@@ -1,7 +1,7 @@
 <?php
 include('include/connect.php');
 // Fetch business details (your business)
-$user_query = "SELECT * FROM user_details WHERE id = 1"; // Assuming only one business user
+$user_query = "SELECT * FROM user_details ORDER BY id DESC LIMIT 1";
 $user_result = $con->query($user_query);
 $user = $user_result->fetch_assoc();
 
@@ -277,6 +277,11 @@ $date = date('Y-m-d');
                     <input type="text" id="challan_number" name="challan_number" placeholder="Enter Challan number"
                         required />
                 </div>
+                <div class="form-group">
+                    <label for="c_name">Number</label>
+                    <input type="text" id="c_number" name="c_number" placeholder="Enter number"
+                        required />
+                </div>
 
                 <input type="hidden" name="date" value="<?php echo $date; ?>">
 
@@ -390,6 +395,9 @@ $date = date('Y-m-d');
         </div>
     </div>
 </body>
+<footer style="text-align: center; padding: 10px; width: 100%; background-color: #f1f1f1;">
+    <p>All rights reserved &copy; 2025 Parth Gala</p>
+</footer>
 
 </html>
 

@@ -25,11 +25,10 @@ if ($result->num_rows === 0) {
 
 $invoice = $result->fetch_assoc();
 
-$user_query = "SELECT * FROM user_details WHERE id = 1";
+$user_query = "SELECT * FROM user_details ORDER BY id DESC LIMIT 1";
 $user_result = $con->query($user_query);
 $user = $user_result->fetch_assoc();
 
-// Create new PDF document
 $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
 $pdf->setPrintHeader(false);
 $pdf->setPrintFooter(false);

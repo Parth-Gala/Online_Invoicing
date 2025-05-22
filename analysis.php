@@ -88,7 +88,6 @@ if ($invoiceResult) {
     }
 }
 
-// Sort products by total sales in descending order
 arsort($topProducts);
 
 // Limit to top 5 products
@@ -350,5 +349,8 @@ $con->close();
         );
     </script>
 </body>
+<footer style="text-align: center; padding: 10px; width: 100%; background-color: #f1f1f1;">
+    <p>All rights reserved &copy; 2025 Parth Gala</p>
+</footer>
 
 </html>

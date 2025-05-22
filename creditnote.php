@@ -16,7 +16,7 @@ $customer_query = "SELECT * FROM customer_details WHERE id = $customer_id";
 $customer_result = $con->query($customer_query);
 $customer = $customer_result->fetch_assoc();
 
-$user_query = "SELECT * FROM user_details WHERE id = 1";
+$user_query = "SELECT * FROM user_details ORDER BY id DESC LIMIT 1";
 $user_result = $con->query($user_query);
 $user = $user_result->fetch_assoc();
 
